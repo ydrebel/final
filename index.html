@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to ABARIMBI Family</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #ff9a00;
+            --text-color: #ffffff;
+            --overlay-color: rgba(0, 0, 0, 0.6);
+            --card-bg: rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .welcome-container {
+            max-width: 800px;
+            padding: 50px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            animation: fadeInUp 1.2s ease-out;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 154, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ff9a00, #ff6b00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tagline::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+
+        .contact-info {
+            margin: 25px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .contact-info a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .contact-info a i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--accent-color), #ff6b00);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 154, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        .enter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b00, var(--accent-color));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+            border-radius: 50px;
+        }
+
+        .enter-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 154, 0, 0.4);
+        }
+
+        .enter-btn:hover::before {
+            opacity: 1;
+        }
+
+        .enter-btn:active {
+            transform: translateY(0);
+        }
+
+        .floating-images {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .floating-img {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0.8;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            animation: float 25s infinite linear;
+            filter: brightness(1.1) contrast(1.1);
+            transition: var(--transition);
+        }
+
+        .floating-img:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            z-index: 2;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .welcome-container {
+                padding: 40px;
+                width: 90%;
+            }
+            
+            .floating-img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.3rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .enter-btn {
+                padding: 15px 40px;
+                font-size: 1rem;
+            }
+            
+            .floating-img {
+                width: 80px;
+                height: 80px;
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-info a {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .welcome-container {
+                padding: 30px 20px;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .floating-img {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background images -->
+    <div class="floating-images">
+        <img src="welcome/E.jpeg" class="floating-img" style="left: 5%; animation-delay: 0s; animation-duration: 20s;">
+        <img src="welcome/D.jpeg" class="floating-img" style="left: 15%; animation-delay: 3s; animation-duration: 22s;">
+        <img src="welcome/ER.jpeg" class="floating-img" style="left: 25%; animation-delay: 6s; animation-duration: 18s;">
+        <img src="welcome/10.jpeg" class="floating-img" style="left: 35%; animation-delay: 9s; animation-duration: 25s;">
+        <img src="welcome/A.jpeg" class="floating-img" style="left: 45%; animation-delay: 12s; animation-duration: 20s;">
+        <img src="welcome/O.jpeg" class="floating-img" style="left: 55%; animation-delay: 15s; animation-duration: 22s;">
+        <img src="welcome/OP.jpeg" class="floating-img" style="left: 65%; animation-delay: 18s; animation-duration: 19s;">
+        <img src="welcome/7.jpeg" class="floating-img" style="left: 75%; animation-delay: 21s; animation-duration: 23s;">
+        <img src="welcome/I.jpeg" class="floating-img" style="left: 85%; animation-delay: 24s; animation-duration: 21s;">
+        <img src="welcome/Z.jpeg" class="floating-img" style="left: 95%; animation-delay: 27s; animation-duration: 24s;">
+    </div>
+    
+    <!-- Animated particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Main content -->
+    <div class="welcome-container">
+        <h1>ABARIMBI Family</h1>
+        <p class="subtitle">MURAKAZA NEZA</p>
+        <p class="tagline">Celebrating life together - Tumenyane</p>
+        
+        <div class="contact-info">
+            <a href="tel:+2507955952534"><i class="fas fa-phone"></i> +250 795 595 2534</a>
+            <a href="https://wa.me/2507955952534"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="mailto:gashemadanny2@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+        
+        <a href="family.html" class="enter-btn">Enter Family Portal</a>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 8 + 2;
+                const posX = Math.random() * 100;
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 15;
+                
+                // Apply styles
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.6 + 0.2;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            createParticles();
+            
+            // Add hover effect to floating images
+            const floatingImages = document.querySelectorAll('.floating-img');
+            floatingImages.forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.2)';
+                    this.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.4)';
+                    this.style.zIndex = '10';
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+                    this.style.zIndex = '1';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
